@@ -1,10 +1,25 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
 public enum EspecialidadProfesorado {
-    INFORMACIA,
-    SISTEMAS,
-    FOL;
+    INFORMATICA("Informática"),
+    SISTEMAS("Sistemas"),
+    FOL("Fol");
 
 
+    private final String cadenaAMostrar;
 
+    EspecialidadProfesorado(String cadenaAMostrar) {
+        this.cadenaAMostrar = cadenaAMostrar;
+    }
+
+    public String imprimir() {
+        return cadenaAMostrar;
+    }
+
+    @Override
+    public String toString() {
+        return "EspecialidadProfesorado{" +
+                "cadenaAMostrar='" + cadenaAMostrar + '\'' +
+                '}';
+    }
 }
