@@ -2,13 +2,10 @@ package org.iesalandalus.programacion.matriculacion.dominio;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CicloFormativoTest {
-/*
+
     private static final String CADENA_NO_ESPERADA = "La cadena devuelta no es la esperada.";
 
     private static final String NOMBRE_NO_ESPERADO = "El nombre devuelto no es el mismo que el pasado al constructor.";
@@ -50,7 +47,7 @@ public class CicloFormativoTest {
 
     @Test
     public void constructorCodigoValidoFamiliaProfesionalValidaGradoValidoNombreValidoHorasValidasCreaCicloFormativoCorrectamente() {
-        CicloFormativo cf=new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+        CicloFormativo cf=new CicloFormativo(CODIGO_CF);
 
         assertEquals(CODIGO_CF, cf.getCodigo(), CODIGO_NO_ESPERADO);
         assertEquals(FAMILIA_PROFESIONAL_CF, cf.getFamiliaProfesional(), FAMILIA_PROFESIONAL_NO_ESPERADA);
@@ -64,7 +61,7 @@ public class CicloFormativoTest {
     public void constructorCodigoNoValidoFamiliaProfesionalValidaGradoValidoNombreValidoHorasValidasLanzaExcepcion() {
         CicloFormativo cf = null;
         try {
-            cf = new CicloFormativo(CODIGO_CF_MAL, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+            cf = new CicloFormativo(CODIGO_CF_MAL);
             fail(CODIGO_INCORRECTO);
         } catch (IllegalArgumentException e) {
             assertNull(cf, OBJETO_DEBERIA_SER_NULO);
@@ -73,7 +70,7 @@ public class CicloFormativoTest {
         }
 
         try {
-            cf = new CicloFormativo(CODIGO_CF_MAL_2, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+            cf = new CicloFormativo(CODIGO_CF_MAL_2);
             fail(CODIGO_INCORRECTO);
         } catch (IllegalArgumentException e) {
             assertNull(cf, OBJETO_DEBERIA_SER_NULO);
@@ -88,7 +85,7 @@ public class CicloFormativoTest {
         CicloFormativo cf = null;
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, null, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(FAMILIA_PROFESIONAL_INCORRECTA);
         } catch (NullPointerException e) {
             assertEquals(ERROR_FAMILIA_PROFESIONAL_NULA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -98,7 +95,7 @@ public class CicloFormativoTest {
         }
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, "", GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(FAMILIA_PROFESIONAL_INCORRECTA);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_FAMILIA_PROFESIONAL_NO_VALIDA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -108,7 +105,7 @@ public class CicloFormativoTest {
         }
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, "   ", GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(FAMILIA_PROFESIONAL_INCORRECTA);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_FAMILIA_PROFESIONAL_NO_VALIDA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -124,7 +121,7 @@ public class CicloFormativoTest {
         CicloFormativo cf = null;
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, null, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(GRADO_INCORRECTO);
         } catch (NullPointerException e) {
             assertEquals(ERROR_GRADO_NULO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -140,7 +137,7 @@ public class CicloFormativoTest {
         CicloFormativo cf = null;
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, null, HORAS_CICLO_FORMATIVO);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(NOMBRE_INCORRECTO);
         } catch (NullPointerException e) {
             assertEquals(ERROR_NOMBRE_NULO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -150,7 +147,7 @@ public class CicloFormativoTest {
         }
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF,"", HORAS_CICLO_FORMATIVO);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(NOMBRE_INCORRECTO);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_NOMBRE_NO_VALIDO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -160,7 +157,7 @@ public class CicloFormativoTest {
         }
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, "   ", HORAS_CICLO_FORMATIVO);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(NOMBRE_INCORRECTO);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_NOMBRE_NO_VALIDO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -176,7 +173,7 @@ public class CicloFormativoTest {
         CicloFormativo cf = null;
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, 0);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(HORAS_INCORRECTA);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_HORAS_INCORRECTA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -186,7 +183,7 @@ public class CicloFormativoTest {
         }
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, 3000);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(HORAS_INCORRECTA);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_HORAS_INCORRECTA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -196,7 +193,7 @@ public class CicloFormativoTest {
         }
 
         try {
-            cf = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, -2);
+            cf = new CicloFormativo(CODIGO_CF);
             fail(HORAS_INCORRECTA);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_HORAS_INCORRECTA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -208,7 +205,7 @@ public class CicloFormativoTest {
 
     @Test
     public void constructorCicloFormativoValidoCopiaCicloFormativoCorrectamente() {
-        CicloFormativo cf1 = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+        CicloFormativo cf1 = new CicloFormativo(CODIGO_CF);
         CicloFormativo cf2 = new CicloFormativo(cf1);
         assertEquals(cf1, cf2, CICLO_FORMATIVO_NO_ESPERADO);
         assertEquals(CODIGO_CF, cf2.getCodigo(), CODIGO_NO_ESPERADO);
@@ -235,7 +232,7 @@ public class CicloFormativoTest {
 
     @Test
     public void toStringDevuelveLaCadenaEsperada() {
-        CicloFormativo cf = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+        CicloFormativo cf = new CicloFormativo(CODIGO_CF);
 
         assertEquals(String.format("Código ciclo formativo=%d, familia profesional=%s, grado=%s, nombre ciclo formativo=%s, horas=%s",CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO), cf.toString(), CADENA_NO_ESPERADA);
 
@@ -243,10 +240,10 @@ public class CicloFormativoTest {
 
     @Test
     public void imprimirDevuelveLaCadenaEsperada() {
-        CicloFormativo cf = new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+        CicloFormativo cf = new CicloFormativo(CODIGO_CF);
 
         assertEquals(String.format("Código ciclo formativo=%d, nombre ciclo formativo=%s",CODIGO_CF, NOMBRE_CICLO_FORMATIVO), cf.imprimir(), CADENA_NO_ESPERADA);
 
     }
-*/
+
 }

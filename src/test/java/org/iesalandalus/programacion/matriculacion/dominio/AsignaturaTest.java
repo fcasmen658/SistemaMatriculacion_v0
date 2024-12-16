@@ -1,16 +1,12 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
+import org.iesalandalus.programacion.matriculacion.vista.Consola;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AsignaturaTest {
-/*
+
     private static final String ERROR_EXCEPCION = "Debería haber saltado la excepción.";
     private static final String ERROR_NO_EXCEPCION = "No debería haber saltado la excepción.";
     private static final int CODIGO_CF=1225;
@@ -44,13 +40,13 @@ public class AsignaturaTest {
     private static final String TIPO_EXCEPCION_NO_CORRECTA = "El tipo de la excepción no es correcto.";
 
 
-    CicloFormativo cf=new CicloFormativo(CODIGO_CF, FAMILIA_PROFESIONAL_CF, GRADO_CF, NOMBRE_CICLO_FORMATIVO, HORAS_CICLO_FORMATIVO);
+    CicloFormativo cf=new CicloFormativo(CODIGO_CF);
 
     @Test
     public void constructorParametrosValidoCreaAsignaturaCorrectamenteTest() {
         Asignatura asignatura = null;
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             assertEquals(CODIGO_ASIGNATURA, asignatura.getCodigo());
             assertEquals(NOMBRE_ASIGNATURA, asignatura.getNombre());
             assertEquals(HORAS_ASIGNATURA, asignatura.getHorasAnuales());
@@ -68,7 +64,7 @@ public class AsignaturaTest {
     public void constructorParametrosNoValidoTest() {
         Asignatura asignatura = null;
         try {
-            asignatura = new Asignatura(null, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(Consola.leerAsignatura(Consola.leerCicloFormativo()));
             fail(ERROR_EXCEPCION);
         } catch (NullPointerException e) {
             assertEquals(ERROR_CODIGO_NULO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -76,7 +72,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura("", NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura("");
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_CODIGO_INCORRECTO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -84,7 +80,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura("         ", NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura("         ");
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_CODIGO_INCORRECTO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -92,7 +88,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA_MAL, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA_MAL);
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_CODIGO_FORMATO_INCORRECTO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -100,7 +96,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura("1234567", NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura("1234567");
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_CODIGO_FORMATO_INCORRECTO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -108,7 +104,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, null,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (NullPointerException e) {
             assertEquals(ERROR_NOMBRE_NULO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -116,7 +112,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, "",HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_NOMBRE_INCORRECTO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -124,7 +120,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, "            ",HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_NOMBRE_INCORRECTO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -132,7 +128,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,0,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_HORAS_INCORRECTAS, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -140,7 +136,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,-2,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_HORAS_INCORRECTAS, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -148,7 +144,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,301,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_HORAS_INCORRECTAS, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -156,7 +152,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,null,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (NullPointerException e) {
             assertEquals(ERROR_CURSO_NULO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -164,7 +160,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,-2,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_HORAS_DESDOBLE_INCORRECTAS, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -172,7 +168,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,7,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (IllegalArgumentException e) {
             assertEquals(ERROR_HORAS_DESDOBLE_INCORRECTAS, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -180,7 +176,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,null,cf);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (NullPointerException e) {
             assertEquals(ERROR_ESPECIALIDAD_NULA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -188,7 +184,7 @@ public class AsignaturaTest {
         }
 
         try {
-            asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,null);
+            asignatura = new Asignatura(CODIGO_ASIGNATURA);
             fail(ERROR_EXCEPCION);
         } catch (NullPointerException e) {
             assertEquals(ERROR_CICLO_FORMATIVO_ASIGNATURA_NULO, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -198,7 +194,7 @@ public class AsignaturaTest {
 
     @Test
     public void constructorCopiaValidoCopiaAsignaturaCorrectamente() {
-        Asignatura asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+        Asignatura asignatura = new Asignatura(CODIGO_ASIGNATURA);
         Asignatura asignatura1;
         try {
             asignatura1 = new Asignatura(asignatura);
@@ -219,7 +215,7 @@ public class AsignaturaTest {
     public void constructorAsignaturaNulaLanzaExcepcion() {
         Asignatura asignatura = null;
         try {
-            asignatura = new Asignatura(null);
+            asignatura = new Asignatura(Consola.leerAsignatura(Consola.leerCicloFormativo()));
             fail(ASIGNATURA_NULA);
         } catch (NullPointerException e) {
             assertEquals(ERROR_COPIAR_ASIGNATURA_NULA, e.getMessage(), MENSAJE_EXCEPCION_NO_CORRECTO);
@@ -232,7 +228,7 @@ public class AsignaturaTest {
 
     @Test
     void toStringDevuelveLaCadenaEsperada() {
-        Asignatura asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+        Asignatura asignatura = new Asignatura(CODIGO_ASIGNATURA);
 
         String cadenaEsperada=String.format("Código=%s, nombre=%s, horas anuales=%d, curso=%s, horas desdoble=%d, ciclo formativo=%s, especialidad profesorado=%s", CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,
                 CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA, cf.imprimir(),ESPECIALIDAD_PROFESORADO_ASIGNATURA);
@@ -246,12 +242,12 @@ public class AsignaturaTest {
     void imprimirDevuelveLaCadenaEsperada() {
 
 
-        Asignatura asignatura = new Asignatura(CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA,HORAS_ASIGNATURA,CURSO_ASIGNATURA,HORAS_DESDOBLE_ASIGNATURA,ESPECIALIDAD_PROFESORADO_ASIGNATURA,cf);
+        Asignatura asignatura = new Asignatura(CODIGO_ASIGNATURA);
 
         String cadenaEsperada=String.format("Código asignatura=%s, nombre asignatura=%s, ciclo formativo=%s", CODIGO_ASIGNATURA, NOMBRE_ASIGNATURA, cf.imprimir());
 
         assertEquals(cadenaEsperada, asignatura.imprimir());
 
     }
-*/
+
 }

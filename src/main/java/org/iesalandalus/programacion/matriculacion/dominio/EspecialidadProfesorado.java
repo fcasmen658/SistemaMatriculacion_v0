@@ -5,7 +5,6 @@ public enum EspecialidadProfesorado {
     SISTEMAS("Sistemas"),
     FOL("Fol");
 
-
     private final String cadenaAMostrar;
 
     EspecialidadProfesorado(String cadenaAMostrar) {
@@ -13,7 +12,7 @@ public enum EspecialidadProfesorado {
     }
 
     public String imprimir() {
-        return cadenaAMostrar;
+        return this.ordinal() +  ".-" + cadenaAMostrar;
     }
 
     @Override
@@ -23,3 +22,7 @@ public enum EspecialidadProfesorado {
                 '}';
     }
 }
+
+
+
+

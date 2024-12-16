@@ -4,6 +4,8 @@ public enum Curso {
     PRIMERO("Primero"),
     SEGUNDO("Segundo");
 
+
+
     private final String cadenaAMostrar;
 
     Curso(String cadenaAMostrar) {
@@ -11,11 +13,13 @@ public enum Curso {
     }
 
     public String imprimir() {
-        return cadenaAMostrar;
+        return this.ordinal() +  ".-" + cadenaAMostrar;
     }
 
     @Override
     public String toString() {
-        return cadenaAMostrar;
+        return "Curso{" +
+                "cadenaAMostrar='" + cadenaAMostrar + '\'' +
+                '}';
     }
 }

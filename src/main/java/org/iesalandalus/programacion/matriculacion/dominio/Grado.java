@@ -12,7 +12,7 @@ public enum Grado {
     }
 
     public String imprimir() {
-        return cadenaAMostrar;
+        return this.ordinal() +  ".-" + cadenaAMostrar;
     }
 
     @Override
