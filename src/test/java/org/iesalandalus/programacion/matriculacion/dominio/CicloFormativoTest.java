@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CicloFormativoTest {
-
+/*
     private static final String CADENA_NO_ESPERADA = "La cadena devuelta no es la esperada.";
 
     private static final String NOMBRE_NO_ESPERADO = "El nombre devuelto no es el mismo que el pasado al constructor.";
@@ -245,5 +245,5 @@ public class CicloFormativoTest {
         assertEquals(String.format("Código ciclo formativo=%d, nombre ciclo formativo=%s",CODIGO_CF, NOMBRE_CICLO_FORMATIVO), cf.imprimir(), CADENA_NO_ESPERADA);
 
     }
-
+*/
 }

@@ -28,8 +28,7 @@ es la siguiente: [repositorio GitHub con el esqueleto del proyecto](https://gith
 
 Para ello te muestro un diagrama de clases para el mismo y poco a poco te iré explicando los diferentes pasos a realizar:
 
-![](https://github.com/andresrubiodelrio/SistemaMatriculacion_v0/blob/master/src/main/resources/SistemaMatriculacion_v0.png)
-
+![diagrama de clases](SistemaMatriculacion_v0.png)
 
 #### Primeros Pasos
 1. Lo primero que debes hacer es un **fork** del repositorio donde he colocado el esqueleto de este proyecto.

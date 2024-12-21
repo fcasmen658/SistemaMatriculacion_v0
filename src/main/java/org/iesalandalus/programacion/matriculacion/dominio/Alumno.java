@@ -22,23 +22,23 @@ public class Alumno extends Matricula {
     private LocalDate fechaNacimiento;
     private String nia;
 
+    //todo revisar constructor sin parámetros en pdf de la tarea 4
+    public Alumno() {
+
+    }
+
     //Constructor con parámetros
-    public Alumno(String nombre, String dni, String correo, String telefono, LocalDate fechaNacimiento) {
-        if (fechaNacimiento == null || dni == null || telefono == null || correo == null || nombre == null) {
-            throw new NullPointerException("ERROR: La fecha de nacimiento de un alumno no puede ser nula.");
-        }
+    public Alumno(String nombre, String correo, String dni,String telefono, LocalDate fechaNacimiento, String nia) {
         setNombre(nombre);
         setDni(dni);
         setCorreo(correo);
         setTelefono(telefono);
         setFechaNacimiento(fechaNacimiento);
+        setNia();
     }
 
     //Constructor copia
     public Alumno(Alumno alumno) {
-        if (alumno == null) {
-            throw new NullPointerException("ERROR: No es posible copiar un alumnado nulo.");
-        }
         this.nombre = alumno.getNombre();
         this.telefono = alumno.getTelefono();
         this.correo = alumno.getCorreo();
@@ -47,19 +47,38 @@ public class Alumno extends Matricula {
         this.nia = alumno.getNia();
     }
 
-    public Alumno(String nombre, String apellidos, String dni, String correo, String telefono, String fechaNacimiento) {
+    public String getNia() {
+        return nia;
     }
 
-    public Alumno() {
-    }
-
-    public static String formateaNombre(String nombre) {
+    private void setNia() throws IllegalArgumentException{
         if (nombre == null) {
-            throw new NullPointerException("ERROR: El nombre de un alumno no puede ser nulo.(27)");
+            throw new NullPointerException("ERROR: No puede establecerse el NIA del alumnado ya que el nombre es nulo.");
         }
-        if (nombre.isBlank() || nombre.isEmpty()) {
-            throw new IllegalArgumentException("ERROR: El nombre de un alumno no puede estar vacío.(30)");
+        if (nombre.isBlank()) {
+            throw new IllegalArgumentException("ERROR: No puede establecerse el NIA del alumnado ya que el nombre es vacío.");
         }
+        if (nombre.length() < 4) {
+            throw new IllegalArgumentException("ERROR: El NIA del alumno/a no puede calcularse porque el nombre del alumno/a tiene menos de 4 caracteres.");
+        }
+        this.nia = nombre.toLowerCase().substring(0, 4) + dni.substring(dni.length() - 3);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) throws IllegalArgumentException {
+        if (nombre == null) {
+            throw new NullPointerException("ERROR: El nombre de un alumno no puede ser nulo.");
+        }
+        if (nombre.isBlank()) {
+            throw new IllegalArgumentException("ERROR: El nombre de un alumno no puede estar vacío.");
+        }
+        this.nombre = formateaNombre(nombre);
+    }
+
+    private String formateaNombre(String nombre) {
 
         // Eliminar espacios en blanco al principio y al final
         nombre = nombre.trim();
@@ -79,46 +98,6 @@ public class Alumno extends Matricula {
 
         // Convertir a cadena y eliminar el último espacio
         return nombreFormateado.toString().trim();
-    }
-
-    private boolean comprobarLetraDni(String dni) throws IllegalArgumentException {
-        if (dni == null)
-            throw new NullPointerException("ERROR: El dni de un alumno no puede ser nulo.");
-        if ((dni.isBlank()))
-            throw new IllegalArgumentException("ERROR: El dni del alumno no tiene un formato válido.");
-        if (!dni.matches(ER_DNI))
-            throw new IllegalArgumentException("ERROR: El dni del alumno no tiene un formato válido.");
-        Pattern pDNI = Pattern.compile(ER_DNI);
-        Matcher mDNI;
-        mDNI = pDNI.matcher(dni);
-        int numeroDni = Integer.parseInt(mDNI.group(1));
-        int resultadodivision = numeroDni % 23;
-        String[] letrasTabla = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
-        boolean dniValido;
-        dniValido = mDNI.group(2).equals(letrasTabla[resultadodivision]);
-        return dniValido;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) throws NullPointerException {
-        if (nombre == null) {
-            throw new NullPointerException("ERROR: El nombre de un alumno no puede ser nulo.");
-        }
-        this.nombre = nombre;
-    }
-
-    public String getNia() {
-        return nia;
-    }
-
-    private void setNia(String nia) throws NullPointerException {
-        if (nia == null) {
-            throw new NullPointerException("ERROR: No puede establecerse el NIA del alumnado ya que el nombre es nulo.");
-        }
-        this.nia = nia;
     }
 
     public String getTelefono() {
@@ -143,9 +122,9 @@ public class Alumno extends Matricula {
         if (correo == null) {
             throw new NullPointerException("ERROR: El correo de un alumno no puede ser nulo.");
         }
-        /*if (!correo.matches(ER_CORREO)) {
+        if (!correo.matches(ER_CORREO)) {
             throw new IllegalArgumentException("ERROR: El correo del alumno no tiene un formato válido.");
-        }*/
+        }
         this.correo = correo;
     }
 
@@ -167,6 +146,24 @@ public class Alumno extends Matricula {
             throw new IllegalArgumentException("ERROR: La letra del dni del alumno no es correcta.");
         }
         this.dni = dni;
+    }
+
+    private boolean comprobarLetraDni(String dni) throws IllegalArgumentException {
+        if (dni == null)
+            throw new NullPointerException("ERROR: El dni de un alumno no puede ser nulo.");
+        if ((dni.isBlank()))
+            throw new IllegalArgumentException("ERROR: El dni del alumno no tiene un formato válido.");
+        if (!dni.matches(ER_DNI))
+            throw new IllegalArgumentException("ERROR: El dni del alumno no tiene un formato válido.");
+        Pattern pDNI = Pattern.compile(ER_DNI);
+        Matcher mDNI;
+        mDNI = pDNI.matcher(dni);
+        int numeroDni = Integer.parseInt(mDNI.group(1));
+        int resultadodivision = numeroDni % 23;
+        String[] letrasTabla = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
+        boolean dniValido;
+        dniValido = mDNI.group(2).equals(letrasTabla[resultadodivision]);
+        return dniValido;
     }
 
     public LocalDate getFechaNacimiento() {
@@ -211,11 +208,12 @@ public class Alumno extends Matricula {
                 ", ER_NIA='" + ER_NIA + '\'' +
                 ", MIN_EDAD_ALUMNADO=" + MIN_EDAD_ALUMNADO +
                 ", nombre='" + nombre + '\'' +
+                ", iniciales='" + getIniciales() + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
                 ", dni='" + dni + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
-                ", nia='" + nia + '\'' +
+                ", nia='" + getNia() + '\'' +
                 '}';
     }
 
@@ -229,55 +227,13 @@ public class Alumno extends Matricula {
                 ", ER_NIA='" + ER_NIA + '\'' +
                 ", MIN_EDAD_ALUMNADO=" + MIN_EDAD_ALUMNADO +
                 ", nombre='" + nombre + '\'' +
+                ", iniciales='" + getIniciales() + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
                 ", dni='" + dni + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
-                ", nia='" + nia + '\'' +
+                ", nia='" + getNia() + '\'' +
                 '}';
     }
 
 }
-
-
-/*
-import java.util.Scanner;
-
-public class CrearNIA {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Solicitar el nombre
-        System.out.print("Introduce tu nombre: ");
-        String nombre = scanner.nextLine();
-
-        // Solicitar el DNI
-        System.out.print("Introduce tu DNI: ");
-        String dni = scanner.nextLine();
-
-        // Validar que el nombre tenga al menos 4 caracteres
-        if (nombre.length() < 4) {
-            System.out.println("El nombre debe tener al menos 4 caracteres.");
-            return;
-        }
-
-        // Validar que el DNI tenga al menos 3 dígitos
-        if (dni.length() < 3) {
-            System.out.println("El DNI debe tener al menos 3 dígitos.");
-            return;
-        }
-
-        // Obtener los primeros 4 caracteres del nombre en minúsculas
-        String primerosCuatro = nombre.substring(0, 4).toLowerCase();
-
-        // Obtener los últimos 3 dígitos del DNI
-        String ultimosTres = dni.substring(dni.length() - 3);
-
-        // Crear el NIA
-        String nia = primerosCuatro + ultimosTres;
-
-        // Mostrar el NIA
-        System.out.println("El NIA es: " + nia);
-    }
-}
- */

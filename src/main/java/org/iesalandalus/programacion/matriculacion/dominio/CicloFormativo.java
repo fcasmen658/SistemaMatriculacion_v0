@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class CicloFormativo extends Alumno {
 
-    private int codigo;// TODO Número de 4 dígitos
+    private int codigo; // TODO Número de 4 dígitos = "\\d{9}"
     private String familiaProfesional;
     private Grado grado;
     private String nombre;
@@ -12,7 +12,7 @@ public class CicloFormativo extends Alumno {
 
     public static final int MAXIMO_NUMERO_HORAS = 2000;
 
-    public CicloFormativo(int codigo) {
+    public CicloFormativo(int codigo, String familiaProfesional, Grado grado, String nombre, int horas) {
         setCodigo(codigo);
         setFamiliaProfesional(familiaProfesional);
         setGrado(grado);
@@ -35,7 +35,7 @@ public class CicloFormativo extends Alumno {
         return codigo;
     }
 
-    public void setCodigo(int codigo) throws IllegalArgumentException{
+    private void setCodigo(int codigo) throws IllegalArgumentException{
         if (false) {
             throw new NullPointerException("ERROR: El código de un ciclo formativo no puede ser nulo. Debe ser un número de 4 dígitos.");
         } else if (codigo < 1000 || codigo > 9999) {
@@ -70,7 +70,7 @@ public class CicloFormativo extends Alumno {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre) throws IllegalArgumentException {
         if (nombre == null) {
             throw new NullPointerException("ERROR: El nombre de un ciclo formativo no puede ser nulo.");
         }

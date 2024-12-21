@@ -141,7 +141,7 @@ public class Consola {
         return EspecialidadProfesorado.values()[Entrada.entero()];
     }
 
-    public static Asignatura leerAsignatura(CicloFormativo cicloFormativo) {
+    public static int leerAsignatura(CicloFormativo cicloFormativo) {
         System.out.println("Introduce los datos de la asignatura: ");
         System.out.print("Código: ");
         String codigo = Entrada.cadena();

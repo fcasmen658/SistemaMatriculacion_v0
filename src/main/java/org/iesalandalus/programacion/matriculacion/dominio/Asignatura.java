@@ -16,6 +16,29 @@ public class Asignatura {
     public static final int MAX_NUM_HORAS_DESDOBLES = 6;
     private static final String ER_CODIGO = "[A-Z]{4}\\d{3}";
 
+    public Asignatura(String codigo, String nombre, int horasAnuales, Curso curso, int horasDesdoble, EspecialidadProfesorado especialidadProfesorado, CicloFormativo cicloFormativo) {
+        setCodigo(codigo);
+        setNombre(nombre);
+        setHorasAnuales(horasAnuales);
+        setCurso(curso);
+        setHorasDesdoble(horasDesdoble);
+        setEspecialidadProfesorado(especialidadProfesorado);
+        setCicloFormativo(cicloFormativo);
+    }
+
+    public Asignatura(Asignatura asignatura) {
+        if (asignatura == null) {
+            throw new NullPointerException("ERROR: No es posible copiar una asignatura nula.");
+        }
+        setCodigo(asignatura.getCodigo());
+        setNombre(asignatura.getNombre());
+        setHorasAnuales(asignatura.getHorasAnuales());
+        setCurso(asignatura.getCurso());
+        setHorasDesdoble(asignatura.getHorasDesdoble());
+        setEspecialidadProfesorado(asignatura.getEspecialidadProfesorado());
+        setCicloFormativo(asignatura.getCicloFormativo());
+    }
+
     public String getCodigo() {
         return codigo;
     }
@@ -108,28 +131,7 @@ public class Asignatura {
                 '}';
     }
 
-    public Asignatura(String codigo) {
-        setCodigo(codigo);
-        setNombre(nombre);
-        setHorasAnuales(horasAnuales);
-        //setCurso(curso);
-        setHorasDesdoble(horasDesdoble);
-        //setEspecialidadProfesorado(especialidadProfesorado);
-        setCicloFormativo(cicloFormativo);
-    }
 
-    public Asignatura(Asignatura asignatura) {
-        if (asignatura == null) {
-            throw new NullPointerException("ERROR: No es posible copiar una asignatura nula.");
-        }
-        setCodigo(asignatura.getCodigo());
-        setNombre(asignatura.getNombre());
-        setHorasAnuales(asignatura.getHorasAnuales());
-        setCurso(asignatura.getCurso());
-        setHorasDesdoble(asignatura.getHorasDesdoble());
-        setEspecialidadProfesorado(asignatura.getEspecialidadProfesorado());
-        setCicloFormativo(asignatura.getCicloFormativo());
-    }
 
 
 
